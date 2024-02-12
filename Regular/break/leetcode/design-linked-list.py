@@ -11,7 +11,7 @@ class MyLinkedList:
 
       
     def get(self, index: int) -> int:
-        if index < 0 or index >= self.length:
+        if index >= self.length:
             return -1
         curr = self.dummy.next
         for _ in range(index):
@@ -47,7 +47,7 @@ class MyLinkedList:
 
       
     def deleteAtIndex(self, index: int) -> None:
-        if index < 0 or index >= self.length:
+        if index >= self.length:
             return
         curr = self.dummy
         for _ in range(index):
