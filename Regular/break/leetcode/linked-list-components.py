@@ -9,12 +9,8 @@ class Solution:
         curr = head
         count = 0
         while curr:
-            if curr and curr.val in num:
-                while curr and curr.val in num:
-                    curr = curr.next
+            if curr.val in num and not(curr.next and curr.next.val in num):
                 count+=1
-            if curr and curr.val not in num:
-                curr = curr.next
-                continue
+            curr = curr.next
         return count
         
