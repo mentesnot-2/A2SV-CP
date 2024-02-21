@@ -1,24 +1,18 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
         n = len(height)
-        prefix = [0] * n
-        suffix = [0] * n
-        prefix[0] = height[0]
-        
+        trappedWater,curr = 0,0
+        stack = []
 
-        for i in range(1,n):
-            prefix[i] = max(prefix[i - 1],height[i])
-
-        suffix[n - 1] = height[n - 1]
-
-        for i in range(n - 2, -1,-1):
-            suffix[i] = max(suffix[i + 1],height[i])
-
-        waterTrapped = 0
-
-
-        for i in range(n):
-            waterTrapped+=(min(prefix[i],suffix[i]) - height[i])
-        return waterTrapped
-
-        
+        while curr < n:
+            while stack and height[stack[-1]] < height[curr]:
+                top_tower = stack.pop()
+                if not stack:
+                    break
+                region_length = curr - stack[-1] - 1
+                region_height = min(height[curr],height[stack[-1]]) - height[top_tower]
+                trappedWater = trappedWater + region_length * region_height
+            stack.append(curr)
+            curr+=1
+        return trappedWater
+                
